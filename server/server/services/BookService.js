@@ -34,6 +34,36 @@ class BookService {
       throw error;
     }
   }
+
+  static async getABook(id) {
+    try {
+      const abook = await database.Book.findOne({
+        where: { id: Number(id) }
+      });
+
+      return abook;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async deleteBook(id) {
+    try {
+      const bookToDelete = await database.Book.findOne({
+        where: { id: Number(id) }
+      });
+
+      if (bookToDelete) {
+        const deletedBook = await database.Book.destroy({
+          where: { id: Number(id) }
+        });
+        return deletedBook;
+      }
+      return null;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default BookService;
