@@ -20,6 +20,7 @@ class BookController {
   }
 
   static async addBook(req, res) {
+    console.log('trying to post');
     if (!req.body.title || !req.body.price || !req.body.description) {
       util.setError(400, 'Please provide complete details');
       return util.send(res);
@@ -27,7 +28,7 @@ class BookController {
     const newBook = req.body;
     try {
       const createdBook = await BookService.addBook(newBook);
-      util.setSuccess(201, 'Book Added!', createdBook);
+      util.setSuccess(201, 'Book data successfully Added!', createdBook);
       return util.send(res);
     } catch (error) {
       util.setError(400, error.message);
