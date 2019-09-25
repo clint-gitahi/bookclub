@@ -4,7 +4,8 @@ node_js:
 cache:
   directories:
     - 'node_modules'
-install: - npm install
+install:
+  - npm install
 services:
   - postgresql
 
@@ -14,7 +15,7 @@ env:
 
 before_script:
   - psql -c 'create database book_test;' -U postgres
-  - psql -c "CREATE USER clinton WITH PASSWORD anonx3636;" -U postgres
+  - psql -c "CREATE USER steven WITH PASSWORD null;" -U postgres
   - npm run build
   - npm install -g sequelize-cli
   - sequelize db:migrate
