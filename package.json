@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "export NODE_ENV=test &&  sequelize db:migrate:undo:all  && sequelize db:migrate  && nyc --require @babel/register  mocha ./server/test/test.js --timeout 20000 --exit",
-    "dev": "nodemon --exec babel-node ./server/index.js"
+    "dev": "nodemon --exec babel-node ./server/index.js",
+    "build": "rm -rf ./build && babel -d ./build ./server -s",
+    "generate-lcov": "nyc report --reporter=test-lcov > lcov.info",
+    "coveralls-coverage": "coveralls < lcov.info",
+    "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
+    "coverage": "nyc npm test && npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage"
   },
   "keywords": [],
   "author": "",
